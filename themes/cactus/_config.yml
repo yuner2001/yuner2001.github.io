@@ -20,6 +20,7 @@ nav:
   projects: projects_url
   search: /search/
   Categories: /categories
+  Tags: /tags
 
 # Links to your social media accounts.
 # The keys should correspond to Fontawesome icon names
