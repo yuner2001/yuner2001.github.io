@@ -17,10 +17,9 @@ nav:
   home: /
   about: /about/
   articles: /archives/
-  categories: /categories
+  Categories: /categories
   Tags: /tags
   search: /search/
-  download: /_post/download.md
 
 # Links to your social media accounts.
 # The keys should correspond to Fontawesome icon names
