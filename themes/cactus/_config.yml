@@ -17,10 +17,10 @@ nav:
   home: /
   about: /about/
   articles: /archives/
-  projects: https://github.com/yuner2001?tab=repositories
-  search: /search/
-  Categories: /categories
+  categories: /categories
   Tags: /tags
+  search: /search/
+  download: /_post/download.md
 
 # Links to your social media accounts.
 # The keys should correspond to Fontawesome icon names
