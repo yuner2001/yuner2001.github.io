@@ -99,6 +99,9 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: cactus
 
+encrypy:
+  enable: false
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
@@ -119,4 +122,3 @@ markdown_it_plus:
     - plugin:
         name: markdown-it-mark
         enable: false
-  
