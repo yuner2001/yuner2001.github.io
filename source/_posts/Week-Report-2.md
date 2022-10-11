@@ -42,7 +42,7 @@ Maskformer的思路是将per-pix classification based的方法改造成mask clas
 
 ### segmentation module
 
-生成mask和classification，用一个两层的MLP，输入Q，得到N个segments的categories， 并且生成N个mask的mask embedding，用这N个embedding和先前的per-pixel embedding求积获得mask。训练时这两部分各有两个loss: $\mathcal L_{classification}$ 、$\mathcal L_{mask}$,前者交叉熵，后者用一般的mask loss，总得loss为: $ \mathcal L = \mathcal L_{classification} + \mathcal L_{mask}$
+生成mask和classification，用一个两层的MLP，输入Q，得到N个segments的categories， 并且生成N个mask的mask embedding，用这N个embedding和先前的per-pixel embedding求积获得mask。训练时这两部分各有两个loss: $ \mathcal L_{classification} $ 、$ \mathcal L_{mask} $,前者交叉熵，后者用一般的mask loss，总得loss为: $ \mathcal L = \mathcal L_{classification} + \mathcal L_{mask} $
 
 最后的到的分类结果和segments输入到相应的头里，这里的头更多取决于Metirc而不是任务，文中提了两种头:
 #### General Head
