@@ -56,6 +56,7 @@ Destroyer and presserver; hear, oh, hear!
 ## formula test
 
 this is inline formula: $a = b + c$
+
 and this is the dependent formula
 $$
 E = mc^2
