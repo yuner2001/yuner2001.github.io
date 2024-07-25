@@ -1,0 +1,42 @@
+hr {
+  border-top: 1px solid #c0c0c0;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  width: 100%;
+  margin: 10px 0;
+}
+
+a {
+  font-style: italic;
+  color: #006400;
+}
+
+body {
+  font-family: "Georgia", "Times New Roman", "Microsoft YaHei", serif;
+  font-size: 19.2px;
+  margin: 0;
+  padding: 0 100px;
+  border: 2px solid #1a1111;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.post-list {
+  list-style-type: none;
+  padding: 0;
+  text-align: left;
+}
+
+.post-list li {
+  margin-bottom: 10px;
+}

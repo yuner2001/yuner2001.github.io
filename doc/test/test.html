@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>test</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href=".\post.css" />
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="最后一个-batch-不完整时怎么计算相关指标">最后一个 Batch
+不完整时怎么计算相关指标</h1>
+<p>在模型训练时，通常将数据按 batch
+送入模型中进行计算。这样的话就会面临一个问题，总数据的个数不能被 batch
+size 整除时，最后一个 batch 的数据量往往不是完整的 batch size
+大小。一般的做法可用将最后一个 batch 丢弃，或者就直接当作全 batch
+来计算。但是随着 batch size 的增大，总的 batch 数目减少，最后一个 batch
+的大小可能和实际的 batch size
+相去甚远，可能会导致结果有较大误差；或者说在某些场景下，我们需要准确的数据，不能舍弃最后一个
+batch，就应该对 loss
+和各个指标的计算方法做出一定修改。下面就讨论下怎么计算才能得到一个相对精确的值。</p>
+<p>首先做一些约定：假设有 <span class="math inline">M</span>
+组（batch）数据,总量为<span class="math inline">N</span>，每组前<span
+class="math inline">M-1</span>组的数据量相同，batch size 均为<span
+class="math inline">N_b</span>，其中第 <span
+class="math inline">m</span> 组的数据个数为 <span
+class="math inline">N_m</span> ，其中第 <span
+class="math inline">i</span> 个数据的某一指标记作为 <span
+class="math inline">d_{mi}</span> （loss、acc、iou 等之类的指标），
+则有：</p>
+<p><span class="math display">
+\begin{aligned}
+&amp;N_b = N_1 = N_2 = ... N_{M-1} \\
+&amp;\sum_{i=1}^MN_i = N \\
+\end{aligned}
+</span></p>
+<p>按照每个 batch 求平均，然后再求 batch
+平均的平均的方法，可得全局的该指标的均值为：</p>
+<p><span class="math display">
+\begin{aligned}
+\bar D = \frac{\sum_{m}^{M}\frac{\sum_i^{N_m}d_{mi}}{N_m}}{M} =&amp;
+\sum_{m}^{M}\frac{\sum_i^{N_m}d_{mi}}{N_mM} \\
+=&amp; \sum_m^{M-1}\frac{\sum_i^{N_m}d_{mi}}{N_mM} +
+\frac{\sum_i^{N_M}d_{Mi}}{N_MM} \\
+=&amp; \sum_m^{M-1}\frac{\sum_i^{N_m}d_{mi}}{N_bM} +
+\frac{\sum_i^{N_M}d_{Mi}}{N_MM} \\
+=&amp; \sum_m^{M-1}\frac{\sum_i^{N_m}d_{mi}}{N_bM} +
+\frac{\sum_i^{N_M}d_{Mi}}{N_MM}  \\
+=&amp; \frac{1}{M}[\sum_m^{M-1}\frac{\sum_i^{N_m}d_{mi}}{N_b} +
+\frac{\sum_i^{N_M}d_{Mi}}{N_M}]
+\end{aligned}
+</span></p>
+<p>计算时候一把都是把中括号中的均值项全部算出来，然后最后除上
+M。而真正的算法应该是：</p>
+<p><span class="math display">
+\begin{aligned}
+\bar D_{gt} = \frac{1}{N}\sum_j^Nd_j &amp;=
+\frac{1}{(M-1)N_b+N_M}[\sum_m^{M-1}\sum_i^{N_m}d_{mi} +
+\sum_i^{N_M}d_{Mi}] \\
+&amp;=\sum_m^{M-1}\frac{\sum_i^{N_m}d_{mi}}{(M-1)N_b+N_M} +
+\frac{\sum_i^{N_M}d_{Mi}}{(M-1)N_b+N_M} \\
+&amp;=\frac{1}{M}[\sum_m^{M-1}\frac{M\sum_i^{N_m}d_{mi}}{(M-1)N_b+N_M} +
+\frac{M\sum_i^{N_M}d_{Mi}}{(M-1)N_b+N_M}]
+\end{aligned}
+</span></p>
+<p>简单观察一下项 <span class="math inline">\sum_i^{N_m}d_{mi}</span>
+和项 <span class="math inline">\sum_i^{N_M}d_{Mi}</span>
+的系数,其实只需要将前 <span class="math inline">M-1</span>个全 batch
+算出来均值<span
+class="math inline">\sum_m^{M-1}\frac{\sum_i^{N_m}d_{mi}}{N_b}</span>乘系数
+<span class="math inline">\frac{MN_b}{(M-1)N_b+N_M}</span>
+，把最后一个不全的 batch 算出来的均值 <span
+class="math inline">\frac{\sum_i^{N_M}d_{Mi}}{N_M}</span>乘上系数<span
+class="math inline">\frac{MN_M}{(M-1)N_b+N_M}</span>,就可以按照原来的先求
+batch 均值再求 batch 之间均值的算法取计算了。</p>
+<p>最后来点代码验证一下,
+从程序上说会有一些计算的误差，但这是由于计算机浮点计算的性质导致的：</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate random data</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>random_list <span class="op">=</span> [random.randint(<span class="dv">1</span>, <span class="dv">100</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">23</span>)]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> random_list.copy()</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;data: &#39;</span>, data)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Build Batches</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>batches, batch <span class="op">=</span> [], []</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(random_list)):</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    batch.append(random_list.pop(<span class="dv">0</span>))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">or</span> <span class="bu">len</span>(random_list) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        batches.append(batch.copy())</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        batch <span class="op">=</span> []</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;batches: &#39;</span>,batches)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> batch_avg(batches):</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    avgs <span class="op">=</span> []</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> batch <span class="kw">in</span> batches:</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="kw">not</span> <span class="bu">len</span>(batch) <span class="op">==</span> <span class="dv">0</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        avgs.append(<span class="bu">sum</span>(batch) <span class="op">/</span> <span class="bu">len</span>(batch))</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(avgs) <span class="op">/</span> <span class="bu">len</span>(avgs)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> true(data):</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(data) <span class="op">/</span> <span class="bu">len</span>(data)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> corrected_batch_avg(batches):</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    m, n_b, n_m <span class="op">=</span> <span class="bu">len</span>(batches), <span class="bu">len</span>(batches[<span class="dv">0</span>]), <span class="bu">len</span>(batches[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    avgs <span class="op">=</span> []</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> batch <span class="kw">in</span> batches:</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="kw">not</span> <span class="bu">len</span>(batch) <span class="op">==</span> <span class="dv">0</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        avgs.append(<span class="bu">sum</span>(batch) <span class="op">/</span> <span class="bu">len</span>(batch))</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    sum_without_last <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(avgs)<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        sum_without_last <span class="op">+=</span> avgs[idx]</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    f_1, f_2 <span class="op">=</span> m<span class="op">*</span>n_b<span class="op">/</span>((m<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span>n_b <span class="op">+</span> n_m), m<span class="op">*</span>n_m<span class="op">/</span>((m<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span>n_b <span class="op">+</span> n_m)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (sum_without_last <span class="op">*</span> f_1 <span class="op">+</span> avgs[<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> f_2) <span class="op">/</span> m</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;batch_avg: </span><span class="sc">{</span>batch_avg(batches)<span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;true: </span><span class="sc">{</span>true(data)<span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;corrected_batch_avg: </span><span class="sc">{</span>corrected_batch_avg(batches)<span class="sc">}</span><span class="ss">&#39;</span>)</span></code></pre></div>
+</body>
+</html>
