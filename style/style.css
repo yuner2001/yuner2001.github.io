@@ -1,0 +1,64 @@
+hr {
+  border-top: 1px solid #c0c0c0; /* 较浅的灰色 */
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  width: 100%;
+  margin: 20px 0;
+}
+
+
+
+a {
+  font-style: italic;
+  color: #006400; /* 暗绿色 */
+}
+
+body {
+  font-family: "Georgia", "Times New Roman", "Microsoft YaHei", serif;
+  font-size: 19.2px;
+  margin: 0 auto;
+  padding: 0;
+  border: 2px solid #1a1111;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  line-height: 2;
+}
+
+/* .section {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+  } */
+
+.section-title {
+  background-color: #ffffff;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.section-content {
+  padding: 5px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+}
+
+.profile-photo {
+  width: 180px;
+  height: auto;
+  aspect-ratio: attr(width) / attr(height);
+  border: 2px solid black;
+  margin-right: 50px;
+}

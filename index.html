@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Yunxuan Xue</title>
+    <link rel="stylesheet" href="style\style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="section">
+        <div class="section-content">
+          <div class="profile">
+            <img
+              src="src\avatar.png"
+              alt="Profile Photo"
+              class="profile-photo"
+            />
+            <div>
+              <h2>Yunxuan Xue</h2>
+              <p>Master Student of CS</p>
+              <p>
+                Email: &nbsp<a href="mailto:yunxuanxue@whu.edu.com"
+                  >yunxuanxue@whu.edu.com</a
+                >
+              </p>
+              <p>
+                Github: &nbsp<a href="https://github.com/yuner2001"
+                  >yuner2001</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title"><h3>About Me</h3></div>
+
+        <div class="section-content">
+          My name is Yunxuan Xue and I am currently a master's student in the
+          School of Computer Science at Wuhan University, majoring in Computer
+          Science and Technology. I previously obtained my bachelor's degree in
+          Computer Science and Technology from the School of Computer Science at
+          Wuhan University as well. My main research interests lie in the areas
+          of multimodal machine learning, probabilistic machine learning, and
+          optimization methods.
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title"><h3>News</h3></div>
+
+        <div class="section-content">
+          <ul>
+            <li>🙂‍↔️My personal homepage has been released!</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title"><h3>Publications</h3></div>
+
+        <div class="section-content">
+          <ul>
+            <li>TBD</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title"><h3>Interests</h3></div>
+        <div class="section-content">
+          <ul>
+            <li>📖Reading</li>
+            <li>🛕Traveling</li>
+            <li>📸Photography</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- <div class="section">
+        <div class="section-content">
+          <script
+            type="text/javascript"
+            src="//rf.revolvermaps.com/0/0/5.js?i=5go42fccqef&amp;m=6&amp;c=ff0000&amp;cr1=ffffff"
+            async="async"
+          ></script>
+        </div>
+      </div> -->
+    </div>
+
+    <script>
+      // JavaScript to handle section toggling
+      const sectionTitles = document.querySelectorAll(".section-title");
+
+      sectionTitles.forEach((title) => {
+        title.addEventListener("click", () => {
+          title.classList.toggle("active");
+          const content = title.nextElementSibling;
+          if (content.style.display === "none") {
+            content.style.display = "block";
+          } else {
+            content.style.display = "none";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
