@@ -6,12 +6,59 @@
 </head>
 <body>
   <div class="container">
-    <h1>Post</h1>
+    <!-- <h1>Post</h1> -->
+    <div class="search-container">
+      <input type="text" class="searchInput" placeholder="Search posts...">
+    </div>
     <hr>
-    <ul class="post-list">
+    <ul class="post-list" id="postList">
       <li><a href="test\test.html">2024.7.26: 最后一个Batch不完整时怎么计算相关指标</a></li>
-      
+      <li><a href="new_post.html">2024.8.1: 新文章标题</a></li>
+      <!-- 添加更多博客链接 -->
     </ul>
   </div>
+
+  <script>
+    // Define the JSON data inline
+    const data = [
+      {
+        "date": "2024-07-26",
+        "title": "测试文章：最后一个Batch不完整时怎么计算相关指标",
+        "link": "test/test.html"
+      },
+      
+    ];
+
+    // Get the article list element
+    const articleList = document.getElementById('postList');
+
+    // Loop through the data and create list items
+    data.forEach(article => {
+      const listItem = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = article.link;
+      link.textContent = `${article.date} ${article.title}`;
+      listItem.appendChild(link);
+      articleList.appendChild(listItem);
+    });
+
+    // Add event listener to the search box
+    const searchBox = document.querySelector('.searchInput');
+    searchBox.addEventListener('input', () => {
+      const searchTerm = searchBox.value.toLowerCase();
+      const listItems = articleList.getElementsByTagName('li');
+
+      // Loop through the list items and show/hide them based on the search term
+      for (let i = 0; i < listItems.length; i++) {
+        const item = listItems[i];
+        const linkText = item.textContent.toLowerCase();
+        if (linkText.includes(searchTerm)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      }
+    });
+  </script>
 </body>
 </html>
