@@ -4,7 +4,6 @@ hr {
   border-left: none;
   border-right: none;
   width: 100%;
-  margin: 10px 0;
 }
 
 a {
@@ -16,9 +15,7 @@ body {
   font-family: "Georgia", "Times New Roman", "Microsoft YaHei", serif;
   font-size: 19.2px;
   margin: 0;
-  padding: 0 100px;
   border: 2px solid #1a1111;
-  max-width: 1200px;
   display: flex;
   justify-content: center;
   align-items: center;
