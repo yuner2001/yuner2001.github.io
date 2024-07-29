@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>avg</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="post.css" />
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#算平均" id="toc-算平均">算平均</a>
+<ul>
+<li><a href="#ma" id="toc-ma">MA</a></li>
+<li><a href="#cma" id="toc-cma">CMA</a></li>
+<li><a href="#ema" id="toc-ema">EMA</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="算平均">算平均</h1>
+<p>从学会数数起，笔者就在学习如何计算平均数，随着知识的增长，笔者发现计算平均数的方法不仅仅只有小学时候的简单算法。于是在这里记录一下常用的算平均数，或者平滑的方法，有些符号滥用，权当潦草笔记写一写。</p>
+<h2 id="ma">MA</h2>
+Moving
+Average，移动平均，最基础的平均值，就是设定一个滑动窗口，然后计算这个滑动窗口内元素的均值，可以加权也可以不加权，用离散卷积很容易实现：
+$$
+<span class="math display">\begin{aligned}
+h(t) &amp;= \begin{cases}  
+w_t &amp; \text{if } 0 \leq t &lt; N \\  
+0 &amp; \text{otherwise}  
+\end{cases} \\
+\\
+y(t) = (x &amp;* h)(t) = \sum_{i=-\infty}^{\infty} x(i) h(t-i)y(t)
+
+​\end{aligned}</span>
+<p>$$ 当然要注意如果数据数目小于窗口数目<span
+class="math inline">N</span>的时候需要特别关照一下（从<span
+class="math inline">N</span>开始计算？填充一下？动态窗口？）。</p>
+<h2 id="cma">CMA</h2>
+<p>Cumulative Moving
+Average，累计移动平均，强化学习里面经常用来累计算期望，而且默认不加权，公式为:
+<span class="math display">
+    \bar X_t = \frac{t-1}{t}\bar X_{t-1} + \frac{1}{t}x_t
+</span> 简单说明就是： <span class="math display">
+\begin{aligned}
+\bar X_t &amp;= \frac{1}{t}\sum_{i=1}^tx_i\\
+&amp;=\frac{t-1}{t}[\frac{1}{t-1}\sum_{i=0}^{t-1}x_i +
+\frac{1}{t-1}x_t]\\
+&amp;=\frac{t-1}{t}\bar X_{t-1} + \frac{1}{t}x_t
+\end{aligned}
+</span></p>
+<h2 id="ema">EMA</h2>
+<p>Exponential Moving
+Average，指数移动平均，最常用的算法，有时候模型的参数的更新（rl，ss），或者是算平滑曲线（tensorboard）都经常用这个方法。公式为：
+<span class="math display">
+    \bar X_t = \alpha\bar X_{t-1} + (1-\alpha)x_t \quad s.t. \quad 0
+\leq \alpha \leq1
+</span> 通常<span class="math inline">\alpha=\frac{2}{N-1}</span>，
+这里的<span
+class="math inline">N</span>是窗口大小，笔者不理解为什么这样用，不no
+matter，一般用的时候也只是调整<span
+class="math inline">\alpha</span>就可以了。而为什么叫做指数移动平均呢？笔者认为这是一个递推的式子，其中把这个<span
+class="math inline">\bar X_t</span>式子展开，就会发现对于第<span
+class="math inline">n</span>时刻的数据点<span
+class="math inline">X_n</span>， 它的系数是<span
+class="math inline">(1-\alpha)^{t+1-n}</span>，就是越接近<span
+class="math inline">t</span>时刻的数据点权重越大，这个权重是一个关于<span
+class="math inline">t</span>的指数函数。</p>
+</body>
+</html>
