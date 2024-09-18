@@ -1,64 +1,150 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Post</title>
-    <link rel="stylesheet" href="post_toc.css" />
-  </head>
-  <body>
-    <div class="container">
-      <!-- <h1>Post</h1> -->
-      <div class="search-container">
-        <input type="text" class="searchInput" placeholder="Search posts..." />
-      </div>
-      <hr />
-      <ul class="post-list" id="postList"></ul>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客导航页</title>
+    <style>
+        a {
+            font-family: "Times New Roman", "Microsoft YaHei", serif;
+            font-style: italic;
+            color: #006400;
+        }
+        body {
+            font-family: "Georgia", "Times New Roman", "Microsoft YaHei", serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            position: relative;
+            height: 100vh;
+        }
+        .folder {
+            background-color: #fefff2;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            position: absolute;
+            cursor: move;
+            min-width: 200px;
+        }
+        .folder::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            width: 50px;
+            height: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+        }
+        .folder h2 {
+            margin-top: 0;
+        }
+        .folder ul {
+            list-style: none;
+            padding: 0;
+        }
+        .folder ul li {
+            margin: 5px 0;
+        }
+        .folder ul li {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .folder ul li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="folder" id="folder1">
+        <h2>随便写写</h2>
+        <ul>
+            <li><a href="test/test.html">测试文章：最后一个Batch不完整时怎么计算相关指标(2024-07-26)</a></li>
+            <li><a href="avg/avg.html">算平均(2024-07-29)</a></li>
+        </ul>
+    </div>
+    <div class="folder" id="folder2">
+        <h2>线性代数</h2>
+        <ul>
+        </ul>
+    </div>
+    <div class="folder" id="folder3">
+        <h2>数学分析</h2>
+        <ul>
+        </ul>
     </div>
 
     <script>
-      // Define the JSON data inline
-      const data = [
-        {
-          date: "2024-07-29",
-          title: "算平均",
-          link: "avg/avg.html",
-        },
-        {
-          date: "2024-07-26",
-          title: "测试文章：最后一个Batch不完整时怎么计算相关指标",
-          link: "test/test.html",
-        },
-      ];
+        let zIndex = 1;
 
-      // Get the article list element
-      const articleList = document.getElementById("postList");
+        document.querySelectorAll('.folder').forEach(folder => {
+            folder.addEventListener('mousedown', (e) => {
+                folder.style.zIndex = zIndex++;
+                let shiftX = e.clientX - folder.getBoundingClientRect().left;
+                let shiftY = e.clientY - folder.getBoundingClientRect().top;
 
-      // Loop through the data and create list items
-      data.forEach((article) => {
-        const listItem = document.createElement("li");
-        const link = document.createElement("a");
-        link.href = article.link;
-        link.textContent = `${article.date} ${article.title}`;
-        listItem.appendChild(link);
-        articleList.appendChild(listItem);
-      });
+                function moveAt(pageX, pageY) {
+                    folder.style.left = pageX - shiftX + 'px';
+                    folder.style.top = pageY - shiftY + 'px';
+                }
 
-      // Add event listener to the search box
-      const searchBox = document.querySelector(".searchInput");
-      searchBox.addEventListener("input", () => {
-        const searchTerm = searchBox.value.toLowerCase();
-        const listItems = articleList.getElementsByTagName("li");
+                function onMouseMove(event) {
+                    moveAt(event.pageX, event.pageY);
+                }
 
-        // Loop through the list items and show/hide them based on the search term
-        for (let i = 0; i < listItems.length; i++) {
-          const item = listItems[i];
-          const linkText = item.textContent.toLowerCase();
-          if (linkText.includes(searchTerm)) {
-            item.style.display = "block";
-          } else {
-            item.style.display = "none";
-          }
+                document.addEventListener('mousemove', onMouseMove);
+
+                folder.onmouseup = function() {
+                    document.removeEventListener('mousemove', onMouseMove);
+                    folder.onmouseup = null;
+                };
+            });
+
+            folder.ondragstart = function() {
+                return false;
+            };
+        });
+
+        function randomPosition(element) {
+            const bodyWidth = document.body.clientWidth;
+            const bodyHeight = document.body.clientHeight;
+            const elementWidth = element.offsetWidth;
+            const elementHeight = element.offsetHeight;
+
+            let posX, posY, overlap;
+
+            do {
+                posX = Math.random() * (bodyWidth - elementWidth);
+                posY = Math.random() * (bodyHeight - elementHeight);
+                overlap = false;
+
+                document.querySelectorAll('.folder').forEach(other => {
+                    if (other !== element) {
+                        const otherRect = other.getBoundingClientRect();
+                        if (
+                            posX < otherRect.right &&
+                            posX + elementWidth > otherRect.left &&
+                            posY < otherRect.bottom &&
+                            posY + elementHeight > otherRect.top
+                        ) {
+                            overlap = true;
+                        }
+                    }
+                });
+            } while (overlap);
+
+            element.style.left = posX + 'px';
+            element.style.top = posY + 'px';
         }
-      });
+
+        document.querySelectorAll('.folder').forEach(folder => {
+            randomPosition(folder);
+        });
     </script>
-  </body>
+</body>
 </html>
