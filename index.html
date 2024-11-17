@@ -16,7 +16,7 @@
             />
             <div>
               <h2>Yunxuan Xue</h2>
-              <p>Master Student of CS</p>
+              <p>School of CS, Wuhan University</p>
               <p>
                 Email: &nbsp<a href="mailto:yunxuanxue@whu.edu.cn"
                   >yunxuanxue@whu.edu.cn</a
@@ -38,10 +38,14 @@
         <div class="section-content">
           My name is Yunxuan Xue and I am currently a master's student in the
           School of Computer Science at Wuhan University, majoring in Computer
-          Science and Technology. I previously obtained my bachelor's degree in
-          Computer Science and Technology from the School of Computer Science at
-          Wuhan University as well. My main research interests lie in the areas
-          of multimodal machine learning.
+          Science and Technology. My advisors are
+          <a href="http://www.captain-whu.com/zh/person/xiaguisong.html"
+            >Prof. Guisong Xia</a
+          >
+          and <a href="https://yuan-gao.net/">Prof. Yuan Gao</a>. I previously
+          obtained my bachelor's degree in Computer Science and Technology from
+          the School of Computer Science at Wuhan University as well. My main
+          research interests lie in the areas of multimodal machine learning.
         </div>
       </div>
 
@@ -50,20 +54,20 @@
 
         <div class="section-content">
           <ul>
-            <li>2024.9.10: Add two blog for test.</li>
-            <li>🙂‍↔️My personal homepage has been released!</li>
+            <li>2024.11.15: <em>One paper under submission.</em></li>
+            <!-- <li>2024.9.10: Add two blog for test.</li>
+            <li>🙂‍↔️My personal homepage has been released!</li> -->
           </ul>
         </div>
       </div>
 
       <div class="section">
         <div class="section-title"><h3>Publications</h3></div>
-
-        <div class="section-content">
-          <ul>
-            <li>TBD</li>
-          </ul>
-        </div>
+        <ul>
+          <li>
+            <strong>[xxxx xx]</strong>: <a href="https://arxiv.org/abs/1234.56789"><strong>Some Brand New Things for Multimodal Learning.</strong> <a href="">[Code]</a></a> </a> <p>by: <strong>Yunxuan Xue</strong>, Xiao Ming, Xiao Wang, Xiao Zhang, Xiao Li</p><div style="display: inline">
+        </ul>
+        
       </div>
 
       <div class="section">
@@ -96,9 +100,15 @@
       const sectionTitles = document.querySelectorAll(".section-title");
 
       sectionTitles.forEach((title) => {
+        const content = title.nextElementSibling;
+        if (title.textContent.trim() === "Interests") {
+          content.style.display = "none"; // Collapse Interests section
+        } else {
+          content.style.display = "block"; // Expand other sections
+        }
+
         title.addEventListener("click", () => {
           title.classList.toggle("active");
-          const content = title.nextElementSibling;
           if (content.style.display === "none") {
             content.style.display = "block";
           } else {
